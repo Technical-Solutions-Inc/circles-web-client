@@ -23,6 +23,6 @@ function makeRequest(uriFragment='', method='GET', data) {
 
 export default makeRequest;
 
-export function getContacts() {
-  return makeRequest('contacts')
+export function ping() {
+  return makeRequest('ping')
 }
