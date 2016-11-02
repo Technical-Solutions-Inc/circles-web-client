@@ -1,1 +1,5 @@
-An open letter to Viget elaborating on their application questions! Structured to facilitate future development using Redux, container/presentational component differentiation, and atomic design.
+To run locally:
+```
+npm install
+npm run dev
+```
