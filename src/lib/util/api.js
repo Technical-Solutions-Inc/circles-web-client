@@ -1,5 +1,9 @@
 import 'isomorphic-fetch';
 
+const BASE_URI = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+  ? 'api/'
+  : 'http://circles-api-live.wpifpxm8xm.us-west-1.elasticbeanstalk.com/api/';
+
 /**
  * Base method for making requests to the server.
  * @param uriFragment
@@ -18,11 +22,15 @@ function makeRequest(uriFragment='', method='GET', data) {
 
   if (data) { requestOpts.body = JSON.stringify(data) }
 
-  return fetch(`api/${uriFragment}`, requestOpts)
+  return fetch(`${BASE_URI}${uriFragment}`, requestOpts)
 }
 
 export default makeRequest;
 
 export function ping() {
   return makeRequest('ping')
+}
+
+export function getEvents(userId=1) {
+  return makeRequest(`events?user_id=${userId}`);
 }

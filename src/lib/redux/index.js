@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
-import contacts from './contacts';
+import events from './events';
+// import ui from './ui';
 
 export default combineReducers({
-  contacts
+  events
 })

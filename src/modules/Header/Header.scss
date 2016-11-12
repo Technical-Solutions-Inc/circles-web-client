@@ -1,0 +1,33 @@
+@import 'constants';
+
+$module: 'Header';
+
+.#{$module} {
+  z-index: 3;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
+  width: 100%;
+  background-color: $gray-darker;
+  color: $white;
+
+  &__events-link {
+    padding: 1rem;
+    color: $white;
+    &:hover { color: $blue }
+  }
+
+  &__logo {
+    position: absolute;
+    left: 50%;
+    text-align: center;
+    width: 6rem;
+    margin-left: -3rem;
+  }
+
+  &__account-box {
+    padding: 1rem;
+  }
+}
