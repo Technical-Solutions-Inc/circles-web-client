@@ -8,6 +8,11 @@ $module: 'EventsList';
   padding: 2rem 6rem;
   //justify-content: space-between;
 
+  &--loading {
+    justify-content: center;
+    padding-top: 8rem;
+  }
+
   &__event-tile {
     &-container {
       position: relative;

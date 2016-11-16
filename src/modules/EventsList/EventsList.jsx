@@ -6,6 +6,10 @@ import { StaggeredMotion, spring } from 'react-motion'
 import cxHelpers from 'lib/decorators/classNameHelpers';
 import EventTile from 'components/EventTile';
 
+// Set buffer to mitigate jerkiness caused when ReactMotion tries to
+// execute while the rest of the javascript is mid-execution.
+const BUFFER_DURATION = 500;
+
 @cxHelpers("EventsList")
 class EventsList extends PureComponent {
   static propTypes = {
@@ -13,32 +17,45 @@ class EventsList extends PureComponent {
     events: PropTypes.array
   };
 
+  constructor() {
+    super();
+    this.state = {
+      buffering: true
+    }
+  }
+
+  componentDidMount() {
+    setTimeout(() => this.setState({ buffering: false }), BUFFER_DURATION)
+  }
+
+  getStyles = (prevStyles) => prevStyles.map((_, i) => {
+    return i ===0 ? {s: spring(1)} : {s: spring(prevStyles[i - 1].s)}
+  });
+
+  motionFunc = (events) => (interpolatingStyles) => {
+    return <div className={this.cx()}>
+      {interpolatingStyles.map((style, i) => {
+        let {members, image_url, name} = events.get(i);
+
+        return (
+          <div key={i}
+               className={this.cxEl('event-tile-container')}
+               style={{transform: `scale(${style.s})`}}>
+            <div className={this.cxEl('event-tile-wrapper')}>
+              <EventTile {...{members, image_url, name}} />
+            </div>
+          </div>
+        )
+      }) }
+    </div>;
+  };
+
   renderEvents(events) {
     const defaultStyles = events.toJS().map(e => ({s: 0}));
-    const styles = (prevInterpolatedStyles) => prevInterpolatedStyles.map((_, i) => {
-      return i ===0 ? {s: spring(1)} : {s: spring(prevInterpolatedStyles[i - 1].s)}
-    });
-
-    const motionFunc = interpolatingStyles =>
-      <div className={this.cx()}>
-        {interpolatingStyles.map((style, i) => {
-          let {members, image_url, name} = events.get(i);
-
-          return (
-            <div key={i}
-                 className={this.cxEl('event-tile-container')}
-                 style={{transform: `scale(${style.s})`}}>
-              <div className={this.cxEl('event-tile-wrapper')}>
-                <EventTile {...{members, image_url, name}} />
-              </div>
-            </div>
-          )
-        }) }
-      </div>;
 
     return(
-      <StaggeredMotion {...{defaultStyles, styles}}>
-        {motionFunc}
+      <StaggeredMotion {...{defaultStyles, styles: this.getStyles}}>
+        {this.motionFunc(events)}
       </StaggeredMotion>
     )
   }
@@ -46,8 +63,8 @@ class EventsList extends PureComponent {
   render(){
     const { events, isLoading } = this.props;
 
-    return !events || isLoading
-      ? <div className={this.cx()}>"Loading..."</div>
+    return !events || isLoading || this.state.buffering
+      ? <div className={this.cx('loading')}>Loading...</div>
       : this.renderEvents(events)
   }
 }

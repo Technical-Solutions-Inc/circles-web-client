@@ -5,6 +5,8 @@ import React, { PureComponent, PropTypes } from 'react';
 import cxHelpers from 'lib/decorators/classNameHelpers';
 import Avatar from 'components/Avatar';
 
+const MENU_SPAN_MODS = ['one', 'two', 'three'];
+
 @cxHelpers("AccountBox")
 class AccountBox extends PureComponent {
   constructor() {
@@ -21,9 +23,7 @@ class AccountBox extends PureComponent {
   };
 
   handleClick = () => {
-    console.log('click')
     this.setState({ expanded: !this.state.expanded });
-    // this.props.onClick();
   };
 
   render(){
@@ -38,7 +38,7 @@ class AccountBox extends PureComponent {
           <span className={this.cxEl('name')}>{username}</span>
 
           <div className={this.cxEl('menu-icon', { expanded })}>
-            {['one', 'two', 'three'].map((m, i) =>
+            {MENU_SPAN_MODS.map((m, i) =>
               <span key={i} className={this.cxEl('menu-icon-bar', {[m]: true})} />
             )}
           </div>

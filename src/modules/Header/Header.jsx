@@ -24,7 +24,7 @@ class Header extends PureComponent {
         </Link>
 
         <div className={this.cxEl('logo')}>
-          CIRCLES
+          <Link to="/" className={this.cxEl('logo-text')}>CIRCLES</Link>
         </div>
 
         <AccountBox

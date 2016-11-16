@@ -13,7 +13,8 @@ $module: 'Header';
   background-color: $gray-darker;
   color: $white;
 
-  &__events-link {
+  &__events-link,
+  &__logo-text {
     padding: 1rem;
     color: $white;
     &:hover { color: $blue }

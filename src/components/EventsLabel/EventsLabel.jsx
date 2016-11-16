@@ -7,10 +7,6 @@ import Icon from 'components/Icon';
 
 @cxHelpers("EventsLabel")
 class EventsLabel extends PureComponent {
-  static propTypes = {
-
-  };
-
   render(){
     return(
       <div className={this.cx()}>

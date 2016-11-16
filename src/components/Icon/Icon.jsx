@@ -17,7 +17,7 @@ const ICON_TYPE_MAP = {
 };
 
 const ICON_TYPES = Object.keys(ICON_TYPE_MAP);
-const ICON_SIZES = [
+export const ICON_SIZES = [
   'xs',
   'sm',
   'md',
