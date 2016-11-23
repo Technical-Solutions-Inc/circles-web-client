@@ -1,11 +1,12 @@
-import './Event.scss';
+import './PeopleIcon.scss';
 
 import React, { PureComponent, PropTypes } from 'react';
 
 import cxHelpers from 'lib/decorators/classNameHelpers';
+import Icon from 'components/Icon';
 
-@cxHelpers("Event")
-class Event extends PureComponent {
+@cxHelpers("PeopleIcon")
+class PeopleIcon extends PureComponent {
   static propTypes = {
 
   };
@@ -13,10 +14,10 @@ class Event extends PureComponent {
   render(){
     return(
       <div className={this.cx()}>
-        <h1>I'm an Event!</h1>
+        <Icon type="people" />
       </div>
     );
   }
 }
 
-export default Event;
+export default PeopleIcon;

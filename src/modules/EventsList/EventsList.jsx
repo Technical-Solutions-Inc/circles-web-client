@@ -33,20 +33,16 @@ class EventsList extends PureComponent {
   });
 
   motionFunc = (events) => (interpolatingStyles) => {
-    return <div className={this.cx()}>
-      {interpolatingStyles.map((style, i) => {
-        let {members, image_url, name} = events.get(i);
-
-        return (
-          <div key={i}
-               className={this.cxEl('event-tile-container')}
-               style={{transform: `scale(${style.s})`}}>
-            <div className={this.cxEl('event-tile-wrapper')}>
-              <EventTile {...{members, image_url, name}} />
-            </div>
+    return <div className={this.cxEl('events')}>
+      {interpolatingStyles.map((style, i) => (
+        <div key={i}
+             className={this.cxEl('event-tile-container')}
+             style={{transform: `scale(${style.s})`}}>
+          <div className={this.cxEl('event-tile-wrapper')}>
+            <EventTile {...events.get(i)} />
           </div>
-        )
-      }) }
+        </div>
+      )) }
     </div>;
   };
 
@@ -63,9 +59,13 @@ class EventsList extends PureComponent {
   render(){
     const { events, isLoading } = this.props;
 
-    return !events || isLoading || this.state.buffering
-      ? <div className={this.cx('loading')}>Loading...</div>
-      : this.renderEvents(events)
+    if (!events || isLoading || this.state.buffering) {
+      return <div className={this.cx('loading')}>Loading...</div>
+    } else {
+      return <div className={this.cx()}>
+        {this.renderEvents(events)}
+      </div>
+    }
   }
 }
 

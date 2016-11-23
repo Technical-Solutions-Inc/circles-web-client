@@ -14,6 +14,7 @@ const ICON_TYPE_MAP = {
   'arrow-back': require('react-icons/lib/md/arrow-back'),
   'arrow-upward': require('react-icons/lib/md/arrow-upward'),
   'image': require('react-icons/lib/md/image'),
+  'people': require('react-icons/lib/md/people'),
 };
 
 const ICON_TYPES = Object.keys(ICON_TYPE_MAP);

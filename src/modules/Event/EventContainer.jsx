@@ -1,9 +1,7 @@
 import React, { PropTypes, PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import cxHelpers from 'lib/decorators/classNameHelpers';
-
-@cxHelpers("EventContainer")
+import Event from './Event';
 
 class EventContainer extends PureComponent {
   static propTypes = {
@@ -13,11 +11,7 @@ class EventContainer extends PureComponent {
   render(){
     const {  } = this.props;
 
-    return(
-      <div className={this.cx()}>
-
-      </div>
-    );
+    return <Event />;
   }
 }
 

@@ -1,11 +1,11 @@
 import React, { PropTypes, PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import cxHelpers from 'lib/decorators/classNameHelpers';
 import { fetchEvents, getEvents, getEventsLoading } from 'lib/redux/events';
 import EventsList from './EventsList';
 
-@cxHelpers("EventsListContainer")
+// To avoid rendering hell
+const EVENT_BATCH_SIZE = 20;
 
 class EventsListContainer extends PureComponent {
   static propTypes = {
@@ -20,7 +20,9 @@ class EventsListContainer extends PureComponent {
 
   render(){
     const { events, isLoading } = this.props;
-    return <EventsList {...{events, isLoading}} />;
+    const shownEvents = events && events.slice(0, EVENT_BATCH_SIZE);
+
+    return <EventsList {...{events: shownEvents, isLoading}} />;
   }
 }
 

@@ -44,9 +44,14 @@ $module: 'EventTile';
     width: 100%;
     height: 60%;
     z-index: 1;
+    padding: 1rem;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  &__member {
+    width: 33%;
+    color: $gray-dark;
   }
 
   &__details {
@@ -60,7 +65,7 @@ $module: 'EventTile';
   }
 
   &__title {
-    font-size: 1.6vw;
+    font-size: 1.2vw;
     position: relative;
     opacity: 0.8;
     width: 100%;
