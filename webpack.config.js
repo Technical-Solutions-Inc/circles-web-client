@@ -3,7 +3,7 @@ var getConfig     = require('hjs-webpack');
 var path          = require('path');
 
 var config = getConfig({
-  in: 'src/app.js',
+  in: 'src',
   out: 'public',
   clearBeforeBuild: true,
   devServer: {

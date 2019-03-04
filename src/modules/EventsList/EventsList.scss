@@ -1,0 +1,42 @@
+@import 'constants';
+
+$module: 'EventsList';
+$num-tiles-per-row: 5;
+
+.#{$module} {
+  padding: 2rem 2rem;
+  max-width: 80rem;
+  margin: 0 auto;
+  text-align: center;
+
+  &__events {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &--loading {
+    justify-content: center;
+    padding-top: 8rem;
+  }
+
+  &__event-tile {
+    &-container {
+      position: relative;
+      width: 100% / $num-tiles-per-row;
+      padding-bottom: 100% / $num-tiles-per-row;
+      height: 0;
+    }
+
+    &-wrapper {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      padding: 1vw;
+    }
+  }
+
+  &__show-more {
+    margin: 2rem auto;
+  }
+}

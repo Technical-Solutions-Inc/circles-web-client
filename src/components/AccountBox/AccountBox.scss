@@ -1,0 +1,120 @@
+@import 'constants';
+
+$module: 'AccountBox';
+$menu-height-unit: 3px;
+$menu-width: $menu-height-unit * 6;
+$menu-height: $menu-height-unit * 5;
+
+.#{$module} {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background: $gray-darker;
+  height: 4rem;
+
+  &--expanded {
+    width: 20rem;
+  }
+
+  &__header {
+    text-align: right;
+    color: $white;
+    transition: color $duration-unit ease-in-out;
+    width: 10rem;
+
+    &:hover {
+      color: $blue;
+
+      .#{$module}__menu-icon-bar {
+        background: $blue;
+      }
+    }
+  }
+
+  &__avatar {
+    margin: -4px 4px 0 0;
+  }
+
+  &__menu-icon {
+    top: 3px;
+    width: $menu-width;
+    height: $menu-height;
+    transform: rotate(0deg);
+    position: relative;
+    display: inline-flex;
+    margin-left: 1rem;
+
+    &-bar {
+      display: block;
+      position: absolute;
+      height: $menu-height-unit;
+      width: 100%;
+      background: $white;
+      border-radius: $menu-height-unit;
+      opacity: 1;
+      left: 0;
+      transform: rotate(0deg);
+      transition: $duration-unit ease-in-out;
+
+      &:hover {
+        background: $gray-lighter;
+      }
+
+      &--one {
+        top: 0;
+      }
+
+      &--two {
+        top: $menu-height-unit * 2;
+      }
+
+      &--three {
+        top: $menu-height-unit * 4;
+      }
+    }
+
+    &--expanded .#{$module}__menu-icon-bar--one {
+      top: $menu-height-unit * 2;
+      transform: rotate(135deg);
+    }
+
+    &--expanded .#{$module}__menu-icon-bar--two {
+      opacity: 0;
+      left: -$menu-width;
+    }
+
+    &--expanded .#{$module}__menu-icon-bar--three {
+      top: $menu-height-unit * 2;
+      transform: rotate(-135deg);
+    }
+  }
+
+  &__menu {
+    position: fixed;
+    top: 4rem;
+    width: 20rem;
+    height: 100%;
+    right: -20rem;
+    background: $gray-dark;
+    transition: $duration-unit * 2;
+
+    &-item {
+      width: 100%;
+      height: 6rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 1px solid $gray;
+      transition: $duration-unit;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $gray;
+      }
+    }
+
+    &--expanded {
+      right: 0;
+    }
+  }
+}

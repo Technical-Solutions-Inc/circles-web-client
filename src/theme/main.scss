@@ -1,4 +1,10 @@
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css');
+@import 'constants';
 
 html { overflow-y: scroll; }
-p { margin-bottom: 20px; }
+body {
+  background: $gray-lighter
+}
+a {
+  transition: $duration-unit;
+}

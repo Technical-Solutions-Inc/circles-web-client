@@ -1,0 +1,23 @@
+@import 'constants';
+
+$module: 'Home';
+
+.#{$module} {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__banner {
+    margin-top: 3rem;
+    font-size: 4rem;
+    color: $gray;
+  }
+
+  &__events-btn {
+    width: 8rem;
+    height: 3rem;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

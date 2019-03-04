@@ -16,14 +16,14 @@ function getCxMod(base, mod) {
  * to the base. If plural, returns an array of each mod appended to
  * the base.
  * @param {string} base
- * @param {(string|array)} mod
+ * @param {(string|object)} mod
  * @returns {(string|array|null)}
  */
-function cxMod(base, mod) {
-  if (mod && mod.constructor === Array) {
-    return mod.map(m => getCxMod(base, m))
-  } else if (typeof mod === 'string' && mod.length > 0) {
-    return getCxMod(base, mod)
+function cxMods(base, mods) {
+  if (mods && typeof mods === 'object') {
+    return Object.entries(mods).map(m => m[1] ? getCxMod(base, m[0]) : null)
+  } else if (typeof mods === 'string' && mods.length > 0) {
+    return getCxMod(base, mods)
   } else {
     return null;
   }
@@ -37,17 +37,17 @@ function cxMod(base, mod) {
  */
 export default function classNameHelpers(block) {
   return function(Component) {
-    Component.prototype.cx = function(mod, ...rest) {
-      return cx(block, cxMod(block, mod), this.props.className, ...rest)
+    Component.prototype.cx = function(mods, ...rest) {
+      return cx(block, cxMods(block, mods), this.props.className, ...rest)
     };
 
-    Component.prototype.cxEl = function(el, mod, ...rest) {
+    Component.prototype.cxEl = function(el, mods, ...rest) {
       if (typeof el !== 'string') {
         throw new Error('Called this.cxEl without an element string!')
       }
       const cxEl = `${block}__${el}`;
 
-      return cx(cxEl, cxMod(cxEl, mod), ...rest)
+      return cx(cxEl, cxMods(cxEl, mods), ...rest)
     };
 
     return Component;
